@@ -40,7 +40,7 @@ for d in $dirs; do
     [ -d "$d" ] && {
         dn=$(basename $d)
         ld=$(perl -e 'print(lc $ARGV[0]);' $dn)
-        ln -s $dr $bin/$ld
+        ln -s $d $bin/$ld
     }
 done
 
