@@ -7,15 +7,15 @@ set -u
 
 cur=`pwd`
 
-# ~/base is where the stuff from install is
-pkgs=$base/packages
+# ~/prog is where the stuff from install is
+pkgs=$prog/packages
 mode=
 if [ "$#" = 1 ]; then
     mode="$1"
 fi
 
-# Check ~/base ( if the install ran )
-if [ ! -d "$base" ] ; then
+# Check ~/prog ( if the install ran )
+if [ ! -d "$prog" ] ; then
     echo "Error: Run installer first."
     exit 1
 fi

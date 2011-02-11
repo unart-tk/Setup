@@ -5,9 +5,9 @@
 # The idea is to feel at home as quick as possible
 
 
-base=$HOME/base
+prog=$HOME/prog
 
-dev_root=$base/dev
+dev_root=$prog/dev
 dev=$HOME/dev
 
 aux_root=$dev/aux.scm

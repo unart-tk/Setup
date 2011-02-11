@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-# takes tars from install/download puts them into install/packages and copies them into ~/base/dev/.
+# takes tars from install/download puts them into install/packages and copies them into ~/prog/dev/.
 # overwrites nothing existing
 
 set -e
@@ -13,19 +13,19 @@ install=$HOME/install
 dl=$install/downloads
 pkgs=$install/packages
 
-base=$HOME/base
-aux_base=$base/dev/aux.scm
+prog=$HOME/prog
+aux_prog=$prog/dev/aux.scm
 
 mode=
 if [ "$#" = 1 ]; then
     mode="$1"
 fi
 
-if [ ! -r "$base" ]; then
-    mkdir $base
+if [ ! -r "$prog" ]; then
+    mkdir $prog
 fi
-if [ ! -r "$aux_base" ]; then
-    mkdir -p $aux_base
+if [ ! -r "$aux_prog" ]; then
+    mkdir -p $aux_prog
 fi
 
 rm -rf $pkgs
@@ -46,10 +46,10 @@ if [ -z "$(ls -A $dl)" ] ; then
     for d in "$dl"/*; do
         dn=$(basename $d)
         dnf=$(echo $dn | sed 's/\.tar\.gz//g' )
-        if [ ! -d "${aux_base}/${dnf}" ] ; then
+        if [ ! -d "${aux_prog}/${dnf}" ] ; then
             cd $dl
             tar xfz $dn -C $pkgs/
-            cp -R $pkgs/$dnf $aux_base/$dnf
+            cp -R $pkgs/$dnf $aux_prog/$dnf
         fi
     done
 fi
