@@ -7,6 +7,11 @@ set -u
 . ./0-setup.sh
 
 
+# directly link tools
+
+rm -f $HOME/tools
+ln -s $toolkit/Tools $HOME/tools
+
 
 # KIT
 
@@ -46,7 +51,11 @@ bin=$HOME/bin
 rm -rf $bin
 mkdir -p $bin
 
-dirs="echo $kit/*aliases $kit/Sw $kit/*tools $kit/*utils $kit/*scripts $kit/Tools $kit/Utils $kit/*bins )"
+# directly link Sw
+
+ln -s $toolkit/Sw $bin/sw
+
+dirs="echo $kit/*aliases $kit/*tools $kit/*utils $kit/*scripts)"
 for d in $dirs; do
     [ -d "$d" ] && {
         dn=$(basename $d)
@@ -56,8 +65,6 @@ for d in $dirs; do
 done
 
 
-# opt
-ln $HOME/aux/opt $bin/opt
 
 # ETC
 # ---
