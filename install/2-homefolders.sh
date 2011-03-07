@@ -21,8 +21,7 @@ rm -rf $kit
 mkdir $kit
 
 
-dirs=$( echo $aux/*kit )
-for d in $dirs; do
+for d in $aux/*kit ; do
     [ -n "$d/*" ] &&
     for dr in $d/*; do
         drn=$(basename $dr)
@@ -31,72 +30,33 @@ for d in $dirs; do
 done
 
 
-
-# IDE
-# ---
-
-ide=$HOME/ide
-rm -rf $ide
-mkdir -p $ide
-
-
-ln -s $HOME/dev/aux.scm/vide.ben.public/* $HOME/ide/
-ln -s $HOME/dev/aux.scm/vibundle.ben.public $HOME/ide/vibundle
-
-
-# BIN
-# ---
+# fill ~/bin
 
 bin=$HOME/bin
-rm -rf $bin
-mkdir -p $bin
+[ -d $bin ] || mkdir $bin
 
-# directly link Sw
+rm -f $bin/utils
+rm -f $HOME/utils
+ln -s $kit/Utils $bin/utils
+ln -s $kit/Utils $HOME/utils
 
-ln -s $toolkit/Sw $bin/sw
+rm -f $bin/scripts
+rm -f $HOME/scripts
+ln -s $kit/Scripts $bin/scripts
+ln -s $kit/Scripts $HOME/scripts
 
-dirs="echo $kit/*aliases $kit/*tools $kit/*utils $kit/*scripts)"
-for d in $dirs; do
-    [ -d "$d" ] && {
-        dn=$(basename $d)
-        ld=$(perl -e 'print(lc $ARGV[0]);' $dn)
-        ln -s $d $bin/$ld
-    }
-done
+rm -f $bin/tools
+rm -f $HOME/tools
+ln -s $kit/Tools $bin/tools
+ln -s $kit/Tools $HOME/tools
 
+rm -f $bin/cmds
+rm -f $HOME/cmds
+ln -s $kit/Cmds $bin/cmds
+ln -s $kit/Cmds $HOME/cmds
 
-
-# ETC
-# ---
-
-etc=$HOME/etc
-rm -rf $etc
-mkdir -p $etc
-
-
-dirs="$( echo $kit/*config $kit/*setup $kit/*passwords $kit/Passwords )"
-
-for d in $dirs; do
-    [ -d "$d" ] && {
-        dn=$(basename $d)
-        ld=$(perl -e 'print(lc $ARGV[0]);' $dn)
-        ln -s $d $etc/$ld
-    }
-done
-
-# DOC 
-# ---
-
-doc=$HOME/doc
-rm -rf $doc
-mkdir -p $doc
+rm -f $bin/sw
+ln -s $kit/Sw $bin/sw
 
 
-dirs="$(echo $kit/*note* $kit/*doc* $kit/*page* $kit/Cheat* $kit/*guides )"
-for d in $dirs; do
-    [ -d "$d" ] && {
-        dn=$(basename $d)
-        ld=$(perl -e 'print(lc $ARGV[0]);' $dn)
-        ln -s $d $doc/$ld
-    }
-done
+

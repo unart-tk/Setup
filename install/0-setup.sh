@@ -1,16 +1,15 @@
-
 #!/bin/sh
 
 # This installs a minimal home environment.
 # The idea is to feel at home as quick as possible
 
 
-prog=$HOME/prog
+studio=$HOME/studio
 
-dev_root=$prog/dev
-dev=$HOME/dev
+codes_root=$studio/codes
+codes=$HOME/codes
 
-aux_root=$dev/aux.scm
+aux_root=$codes/aux.scm
 aux=$HOME/aux
 
 toolkit=$aux_root/toolkit.ben.public

@@ -1,8 +1,8 @@
 #!/bin/sh
 
 
-echo 1-dev-aux.sh
-. ./1-dev-aux.sh
+echo 1-works-aux.sh
+. ./1-works-aux.sh
 
 echo 2-homefolders.sh
 . ./2-homefolders.sh

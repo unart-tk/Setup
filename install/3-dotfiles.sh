@@ -13,34 +13,54 @@ if [ ! -d "$kit" ]; then
     exit 1
 fi
 
+
 #  ### dotfiles
 
-dotfiles="$kit/Shellconfig/dotfiles"
-bashconfig="$dotfiles/bashconfig"
-termconfig="$dotfiles/termconfig"
-toolsconfig="$dotfiles/toolsconfig"
-xconfig="$dotfiles/xconfig"
+shellfiles="$kit/Dotfiles/bashfiles"
+shellextfiles="$kit/Dotfiles/extfiles"
+vimdotfiles="$kit/Vimfiles/dotfiles"
 
-vimdotfiles="$kit/Vimconfig/vimdotfiles"
 
-dfiles="$bashconfig $termconfig $toolsconfig $xconfig $vimdotfiles"
-for dx in $(find $dfiles -maxdepth 1 ); do
-        dn=$(basename "$dx")
-        rm -rf "$HOME/.$dn"
-        ln -s "$dx" "$HOME/.$dn"
+for d in $shellfiles/*; do
+    [ "$(basename $d)" = '*' ] && echo "Error: no files: $shellfiles" && exit 1
+    dn=$(basename "$d")
+    rm -f "$HOME/.$dn"
+    ln -s "$d" "$HOME/.$dn"
+done
+
+for d in $vimdotfiles/*; do
+    [ "$(basename $d)" = '*' ] && echo "Error: no files: $vimdotfiles" && exit 1
+    dn=$(basename "$d")
+    rm -f "$HOME/.$dn"
+    ln -s "$d" "$HOME/.$dn"
 done
 
 
-# vim bundles, the 'pathogen' method:
-vibundle=$kit/vibundle
-if [ -d $HOME/.vim ]; then
-    rm -rf $HOME/.vim/bundle
-    mkdir $HOME/.vim/bundle
-
-    for d in $vibundle/*; do
-        dn=$(basename $d)
-        ln -s $d $HOME/.vim/bundle/$dn
+for d in "$shellextfiles"/* ; do
+    [ "$(basename $d)" = '*' ] && echo "Error: no files: $shellextfiles" && exit 1
+    
+    for dx in "$d"/* ; do
+            dn=$(basename "$dx")
+            rm -f "$HOME/.$dn"
+            ln -s "$dx" "$HOME/.$dn"
     done
-fi
+done
+
+
+# vim stuff
+
+
+
+# # vim bundles, the 'pathogen' method:
+# vibundle=$kit/vibundle
+# if [ -d $HOME/.vim ]; then
+#     rm -rf $HOME/.vim/bundle
+#     mkdir $HOME/.vim/bundle
+# 
+#     for d in $vibundle/*; do
+#         dn=$(basename $d)
+#         ln -s $d $HOME/.vim/bundle/$dn
+#     done
+# fi
 
 

@@ -1,24 +1,23 @@
 #!/bin/sh
 
+set -e
+set -u
 
-url='http://untar.org/files/downloads'
+
+url='http://www.untar.org/files/downloads'
 
 install=$HOME/install
 
 dl=$install/downloads
 
-cur=`pwd`
 
 rm -rf $dl
 mkdir -p $dl
 cd $dl
 
-for r in toolkit sw vibundle; do
-            cd $dl
-            rm -rf $dl/${r}.ben.public*
-            wget ${url}/${r}.ben.public.tar.gz
-done
+rm -rf toolkit.ben.public
+wget ${url}/toolkit.ben.public.tar.gz
 
-cd $cur
+cd $install
 wget ${url}/prepinstall.sh
 chmod 0755 prepinstall.sh

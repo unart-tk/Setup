@@ -7,14 +7,13 @@
 set -e
 set -u
 
-url='http://untar.org/files/downloads'
 
 install=$HOME/install
 dl=$install/downloads
 pkgs=$install/packages
 
 prog=$HOME/prog
-aux_prog=$prog/dev/aux.scm
+aux=$prog/dev/aux.scm
 
 mode=
 if [ "$#" = 1 ]; then
@@ -24,8 +23,8 @@ fi
 if [ ! -r "$prog" ]; then
     mkdir $prog
 fi
-if [ ! -r "$aux_prog" ]; then
-    mkdir -p $aux_prog
+if [ ! -r "$aux" ]; then
+    mkdir -p $aux
 fi
 
 rm -rf $pkgs
@@ -46,10 +45,10 @@ if [ -z "$(ls -A $dl)" ] ; then
     for d in "$dl"/*; do
         dn=$(basename $d)
         dnf=$(echo $dn | sed 's/\.tar\.gz//g' )
-        if [ ! -d "${aux_prog}/${dnf}" ] ; then
+        if [ ! -d "${aux}/${dnf}" ] ; then
             cd $dl
             tar xfz $dn -C $pkgs/
-            cp -R $pkgs/$dnf $aux_prog/$dnf
+            cp -R $pkgs/$dnf $aux/$dnf
         fi
     done
 fi

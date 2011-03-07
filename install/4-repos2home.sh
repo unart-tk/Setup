@@ -11,13 +11,13 @@ repos=$HOME/repos
 rm -rf $repos
 mkdir $repos
 
-[ ! -d "$dev_root" ] && {
-    echo "$dev_root doesn't exist. Exit."
+[ ! -d "$works_root" ] && {
+    echo "$works_root doesn't exist. Exit."
     exit 1
 }
 
 
-for c in $dev_root/*; do
+for c in $works_root/*; do
 	cn=$(basename $c)
 	scn=$(echo $cn | sed 's/\..*//g')
     [ "$(echo $cn | grep '\.scm')" ] && {
