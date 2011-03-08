@@ -10,12 +10,13 @@ cur=`pwd`
 
 # codes
 # ---
-if [ ! -d "$codes_root" ] ; then
-    echo "Error: No dir codes_root $codes_root"
+if [  -d "$codes_root" ]; then
+    rm -f $codes
+    ln -s $codes_root $codes
+elif [ ! -e "$codes" ]; then
+    echo "Error: there is not $codes_root or $codes folder."
     exit 1
 fi
-rm -f $codes
-ln -s $codes_root $codes
 
 # aux
 # ---
