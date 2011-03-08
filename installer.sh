@@ -7,28 +7,14 @@
 set -e
 set -u
 
-
 install=$HOME/install
 dl=$install/downloads
 pkgs=$install/packages
 
-prog=$HOME/prog
-aux=$prog/dev/aux.scm
+codes=$HOME/codes
+aux=$codes/aux.scm
 
 mode=
-if [ "$#" = 1 ]; then
-    mode="$1"
-fi
-
-if [ ! -r "$prog" ]; then
-    mkdir $prog
-fi
-if [ ! -r "$aux" ]; then
-    mkdir -p $aux
-fi
-
-rm -rf $pkgs
-mkdir -p $pkgs
 
 if [ ! -d "$dl" ]; then
     echo "the dl folder $dl is empty"
@@ -37,6 +23,17 @@ if [ ! -d "$dl" ]; then
 fi
 
 cd $dl
+
+if [ "$#" = 1 ]; then
+    mode="$1"
+fi
+
+[ -d "$codes" ] || mkdir $codes
+[ -d "$aux" ] || mkdir -p $aux
+
+rm -rf $pkgs
+mkdir -p $pkgs
+
 
 if [ -z "$(ls -A $dl)" ] ; then
     echo "Error: download $dl folder is empty"
@@ -47,8 +44,10 @@ if [ -z "$(ls -A $dl)" ] ; then
         dnf=$(echo $dn | sed 's/\.tar\.gz//g' )
         if [ ! -d "${aux}/${dnf}" ] ; then
             cd $dl
-            tar xfz $dn -C $pkgs/
-            cp -R $pkgs/$dnf $aux/$dnf
+            echo tar xfz $dn -C $pkgs/
+            echo cp -R $pkgs/$dnf $aux/$dnf
+        else
+            echo "Warning: ${aux}/${dnf} already exists. Omitting ..."
         fi
     done
 fi
