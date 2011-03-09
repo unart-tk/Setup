@@ -13,7 +13,6 @@ dl=$install/downloads
 
 rm -rf $dl
 mkdir -p $dl
-
 cd $dl
 
 rm -rf toolkit.ben.public
