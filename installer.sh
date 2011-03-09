@@ -1,8 +1,13 @@
 #!/bin/sh
 
 
-# takes tars from install/download puts them into install/packages and copies them into ~/prog/dev/.
-# overwrites nothing existing
+# Download packages such as 'toolkit.tar.gz' and installs them into ~/codes.
+
+# 1. Take tars from ./install/download 
+# 2. Extract them into install/packages 
+# 3. Finally copy them into ~/codes/aux.scm
+
+# PS: Nondestructive. If a package in ~/codes/ already  exists, nothing is done.
 
 set -e
 set -u
@@ -16,17 +21,16 @@ aux=$codes/aux.scm
 
 mode=
 
+# before, we proceed. Did we even download anything?
 if [ ! -d "$dl" ]; then
-    echo "the dl folder $dl is empty"
-    echo "run download.sh first"
+    echo "the download folder $dl is empty"
+    echo "run the downloader.sh first"
     exit 1
+else
+    # Ok, theres is a download folder, we begin the install process.
+    cd $dl
 fi
 
-cd $dl
-
-if [ "$#" = 1 ]; then
-    mode="$1"
-fi
 
 [ -d "$codes" ] || mkdir $codes
 [ -d "$aux" ] || mkdir -p $aux
