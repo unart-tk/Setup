@@ -1,8 +1,8 @@
 Fix flickering Dual monitor in ubuntu
 =====================================
 
-	05-10-2010, Ben <ben@leakin.org>
-	setup, instructions
+    by: ben, untar.org
+    in: setup, notes
 
 -------------------------------------
 
