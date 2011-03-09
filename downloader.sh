@@ -19,5 +19,5 @@ rm -rf toolkit.ben.public
 wget ${url}/toolkit.ben.public.tar.gz
 
 cd $install
-wget ${url}/prepinstall.sh
-chmod 0755 prepinstall.sh
+wget ${url}/installer.sh
+chmod 0755 installer.sh

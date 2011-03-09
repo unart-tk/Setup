@@ -47,20 +47,4 @@ for d in "$shellextfiles"/* ; do
 done
 
 
-# vim stuff
-
-
-
-# # vim bundles, the 'pathogen' method:
-# vibundle=$kit/vibundle
-# if [ -d $HOME/.vim ]; then
-#     rm -rf $HOME/.vim/bundle
-#     mkdir $HOME/.vim/bundle
-# 
-#     for d in $vibundle/*; do
-#         dn=$(basename $d)
-#         ln -s $d $HOME/.vim/bundle/$dn
-#     done
-# fi
-
 

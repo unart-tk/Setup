@@ -44,8 +44,8 @@ if [ -z "$(ls -A $dl)" ] ; then
         dnf=$(echo $dn | sed 's/\.tar\.gz//g' )
         if [ ! -d "${aux}/${dnf}" ] ; then
             cd $dl
-            echo tar xfz $dn -C $pkgs/
-            echo cp -R $pkgs/$dnf $aux/$dnf
+            tar xfz $dn -C $pkgs/
+            cp -R $pkgs/$dnf $aux/$dnf
         else
             echo "Warning: ${aux}/${dnf} already exists. Omitting ..."
         fi
