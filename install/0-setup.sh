@@ -18,10 +18,3 @@ vibundle=$aux_root/vibundle.ben.public
 
 kit=$HOME/kit
 
-platform='unknown'
-unamestr=$(uname)
-
-if [ "$unamestr" = 'Darwin' ]; then
-   platform='darwin'
-fi
-
